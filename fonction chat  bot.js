@@ -1,4 +1,22 @@
-function getAnswer() {
+function getWeather() {
+    // Coordonnées de Paris, France
+    const latitude = 48.8566;
+    const longitude = 2.3522;
+
+    // URL de l'API Open-Meteo pour obtenir les prévisions météorologiques
+    const endpoint = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&hourly=temperature_2m,relativehumidity_2m,windspeed_10m`;
+
+    return fetch(endpoint)
+        .then(response => response.json())
+        .then(data => {
+            return `Il fait actuellement ${data.current_weather.temperature}°C avec une vitesse du vent de ${data.current_weather.windspeed} km/h.`;
+        })
+        .catch(error => {
+            return "Erreur lors de la récupération des données météorologiques.";
+        });
+}
+
+async function getAnswer() {
     const input = document.getElementById('userInput').value.toLowerCase();
     let response = "";
 
@@ -18,6 +36,9 @@ function getAnswer() {
         case "quelle est la capitale de la france?":
             response = "La capitale de la France est Paris.";
             break;
+        case "quel temps fait-il":
+            response = await getWeather();
+            break;
         default:
             response = "Désolé, je ne peux pas répondre à cette question.";
             break;
@@ -25,3 +46,4 @@ function getAnswer() {
 
     document.getElementById('botResponse').innerText = response;
 }
+
