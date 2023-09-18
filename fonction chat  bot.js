@@ -17,9 +17,11 @@ function getWeather() {
 }
 
 async function getAnswer() {
+    // définition des variables d'entré de sortie de la fonction
     const input = document.getElementById('userInput').value.toLowerCase();
     let response = "";
 
+    // identification de la question et production d'une réponse approprié
     switch (input) {
         case "comment t'appelles-tu?":
             response = "Je m'appelle Chat-Ensitech.";
@@ -44,6 +46,7 @@ async function getAnswer() {
             break;
     }
 
+    // envoie du message pour un affichage sur le site
     document.getElementById('botResponse').innerText = response;
 }
 
