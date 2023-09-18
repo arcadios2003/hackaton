@@ -17,36 +17,71 @@ function getWeather() {
 }
 
 async function getAnswer() {
-    // définition des variables d'entré de sortie de la fonction
     const input = document.getElementById('userInput').value.toLowerCase();
     let response = "";
 
-    // identification de la question et production d'une réponse approprié
-    switch (input) {
-        case "comment t'appelles-tu?":
-            response = "Je m'appelle Chat-Ensitech.";
-            break;
-        case "quel âge as-tu?":
-            response = "Je suis un programme, je n'ai pas d'âge.";
-            break;
-        case "quelle est ta couleur préférée?":
-            response = "Je n'ai pas de préférence car je ne vois pas les couleurs, mais j'entends que beaucoup de gens aiment le bleu!";
-            break;
-        case "peux-tu me raconter une blague?":
-            response = "Pourquoi les plongeurs plongent-ils en arrière et jamais en avant? Parce que sinon ils tombent toujours dans le bateau.";
-            break;
-        case "quelle est la capitale de la france?":
-            response = "La capitale de la France est Paris.";
-            break;
-        case "quel temps fait-il":
-            response = await getWeather();
-            break;
-        default:
-            response = "Désolé, je ne peux pas répondre à cette question.";
-            break;
-    }
+    let lowerCaseQuestion = question.toLowerCase();
 
-    // envoie du message pour un affichage sur le site
+    switch (question) {
+    // Comment t'appelles-tu ?
+    case "comment t'appelles-tu?":
+    case "Quel est ton nom?":
+    case "Tu es qui?":
+    case "Qui es-tu?":
+    case "Tu t'appelles comment?":
+        response = "Je m'appelle Chat-Ensitech.";
+        break;
+
+    // Quel âge as-tu ?
+    case "quel âge as-tu?":
+    case "Tu as combien d'années?":
+    case "Depuis combien de temps existes-tu?":
+    case "Quel est ton âge?":
+    case "Depuis quand es-tu là?":
+        response = "Je suis un programme, je n'ai pas d'âge.";
+        break;
+
+    // Quelle est ta couleur préférée ?
+    case "quelle est ta couleur préférée?":
+    case "Quelle couleur préfères-tu?":
+    case "Si tu devais choisir une couleur, laquelle serait-ce?":
+    case "Tu as une couleur que tu aimes plus que les autres?":
+    case "Si tu avais une couleur, laquelle serait-elle?":
+        response = "Je n'ai pas de préférence car je ne vois pas les couleurs, mais j'entends que beaucoup de gens aiment le bleu!";
+        break;
+
+    // Peux-tu me raconter une blague ?
+    case "peux-tu me raconter une blague?":
+    case "As-tu une blague à partager?":
+    case "Connais-tu une bonne blague?":
+    case "J'aimerais rire, as-tu une blague?":
+    case "Peux-tu me faire rire avec une blague?":
+        response = "Pourquoi les plongeurs plongent-ils en arrière et jamais en avant? Parce que sinon ils tombent toujours dans le bateau.";
+        break;
+
+    // Quelle est la capitale de la France ?
+    case "quelle est la capitale de la france?":
+    case "Quelle ville est le centre administratif de la France?":
+    case "Où se situe la capitale française?":
+    case "La France a quelle ville comme capitale?":
+    case "Paris est-il la capitale de la France?":
+        response = "La capitale de la France est Paris.";
+        break;
+
+    // Quel temps fait-il ?
+    case "quel temps fait-il":
+    case "Comment est la météo actuellement?":
+    case "Est-il ensoleillé dehors?":
+    case "Quelles sont les conditions météorologiques actuelles?":
+    case "Il fait comment dehors?":
+        response = await getWeather();
+        break;
+
+    default:
+        response = "Désolé, je ne peux pas répondre à cette question.";
+        break;
+}
+
     document.getElementById('botResponse').innerText = response;
 }
 
