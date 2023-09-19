@@ -11,6 +11,10 @@
             $resRQT = $connexion->query($sqlRQT);
         }
     }
+?>
 
+
+
+<?php
     header('location:index.php');
 ?>

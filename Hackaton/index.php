@@ -13,23 +13,27 @@
                     <?php
                         require_once("Connexion/Connexion.inc.php");
 
-                        $rqtMSG = "SELECT message,user FROM log ORDER BY time LIMIT 7;";
+                        $rqtMSG = "SELECT message,user FROM log ORDER BY time DESC LIMIT 7;";
                         $resMSG = $connexion->query($rqtMSG);
+                        
+
                         if($resMSG->rowCount()!=0){
-                            while ($repMSG = $resMSG->fetch(PDO::FETCH_OBJ)){
-                                if($repMSG->user == "user"){
+                            $MSGarray = $resMSG->fetchAll(\PDO::FETCH_ASSOC);
+                            $MSGarray = array_reverse($MSGarray, $preserve_keys = false);
+                            foreach ($MSGarray as &$row){
+                                if($row["user"] == "user"){
                                     ?>
-                                    <div class="message outgoing"><?php echo $repMSG->message ?></div>
+                                    <div class="message outgoing"><?php echo $row["message"] ?></div>
                             <?php
                                 } else {
                             ?>
-                                    <div class="message incoming"><?php echo $repMSG->message ?></div>
+                                    <div class="message incoming"><?php echo $row["message"] ?></div>
                     <?php    
                                 }
                             }
                         }
                     ?>
-                </div>
+                </div> 
                 <div class="user input">
                     <form action="enregistrer.php" method="POST">
                         <input type="text" name="mon-message" id="user-message" placeholder="Tapez votre message">
